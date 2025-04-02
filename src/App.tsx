@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Launch from "./pages/Launch.jsx";
-import { HeroGeometric } from "./pages/Launch.js";
+import { HeroGeometric } from "./pages/Launch.tsx";
+import { Navbar } from "./components/Navbar.tsx";
 
 function App() {
   return (
     <div className="outfit-font">
     <Router>
+    <Navbar />
       <Routes>
         <Route 
           path="/"

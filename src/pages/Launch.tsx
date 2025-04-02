@@ -4,6 +4,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { Circle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Navbar } from "@/components/Navbar";
 
 function ElegantShape({
   className,
@@ -236,7 +237,6 @@ function HeroGeometric({
           </motion.div>
         </div>
       </div>
-
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
   );
