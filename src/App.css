@@ -1,42 +1,107 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@100..900&display=swap');
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.outfit-font {
+    font-family: "Outfit", sans-serif;
   }
-  to {
-    transform: rotate(360deg);
+
+.bricolage-font {
+    font-family: "Bricolage Grotesque", sans-serif;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+  .shiny-text {
+    color: #eeeeeea4; /* Adjust this color to change intensity/style */
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+    animation: shine 5s linear infinite;
   }
-}
+  
+  @keyframes shine {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
+  
+  .shiny-text.disabled {
+    animation: none;
+  }
+  
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
+  .star-border-container {
+    display: inline-block;
+    padding: 1px 0;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .border-gradient-bottom {
+    position: absolute;
+    width: 300%;
+    height: 50%;
+    opacity: 0.7;
+    bottom: -11px;
+    right: -250%;
+    border-radius: 10px;
+    animation: star-movement-bottom linear infinite alternate;
+    z-index: 0;
+  }
+  
+  .border-gradient-top {
+    position: absolute;
+    opacity: 0.7;
+    width: 300%;
+    height: 50%;
+    top: -10px;
+    left: -250%;
+    border-radius: 10px;
+    animation: star-movement-top linear infinite alternate;
+    z-index: 0;
+  }
+  
+  .inner-content {
+    position: relative;
+    background: linear-gradient(to bottom, #060606, #111);
+    border: 1px solid #545454;
+    color: white;
+    text-align: center;
+    padding: 10px 26px;
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  @keyframes star-movement-bottom {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-100%, 0%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes star-movement-top {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100%, 0%);
+      opacity: 0;
+    }
+  }
+  
