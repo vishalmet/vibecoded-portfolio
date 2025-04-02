@@ -11,9 +11,9 @@ function App() {
         <Route 
           path="/"
           element={
-            <HeroGeometric badge="Kokonut UI"
-            title1 = "Elevate Your"
-            title2 = "Digital Vision" />
+            <HeroGeometric badge="Vishal Aakash"
+            title1 = "Crafting intuitive Web3 frontends,"
+            title2 = "powered by robust full-stack solutions." />
           }
         />
         {/* <Route path="/works" element={<h1>Works Page</h1>} />
