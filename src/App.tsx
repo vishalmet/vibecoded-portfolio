@@ -1,30 +1,26 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Launch from "./pages/Launch.jsx";
-import Cursor from "../src/components/cursor.jsx"
+import { HeroGeometric } from "./pages/Launch.js";
 
 function App() {
   return (
-    // <Cursor>
+    <div className="outfit-font">
     <Router>
       <Routes>
         <Route 
           path="/"
           element={
-            <Launch
-              count={75}
-              gravity={0.7}
-              friction={0.8}
-              wallBounce={0.95}
-              followCursor={false}
-            />
+            <HeroGeometric badge="Kokonut UI"
+            title1 = "Elevate Your"
+            title2 = "Digital Vision" />
           }
         />
         {/* <Route path="/works" element={<h1>Works Page</h1>} />
         <Route path="/contact" element={<h1>Contact Page</h1>} /> */}
       </Routes>
     </Router>
-    // </Cursor>
+    </div>
   );
 }
 
