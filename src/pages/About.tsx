@@ -4,9 +4,9 @@ import { Twitter, Linkedin, Mail, CircleArrowRight, Github } from "lucide-react"
 const About = () => {
     return (
         <div className="lg:min-h-screen bg-gradient-to-t from-black via-black to-gray-900 flex justify-center items-center">
-            <Card className=" text-white max-w-[650px]">
-                <CardContent className=" space-y-6">
-                    <div className=" flex gap-6 justify-between">
+            <Card className=" text-white max-w-[650px] m-4 my-10 md:m-10 md:my-24 ">
+                <CardContent className=" space-y-3 md:space-y-6">
+                    <div className=" md:flex gap-6 justify-between">
                         <div className="">
                             <p>Hey, I'm Vishal Aakash.</p>
                             <p className=" text-sm text-white/60">
@@ -44,10 +44,10 @@ const About = () => {
                             </a>
                         </div>
                     </div>
-                    <p className=" text-xl font-semibold">
+                    <p className=" m:text-xl font-semibold">
                         Full-stack developer (MERN) with a focus on building user-friendly front-ends using ReactJS (Vite), NextJS, and Tailwind CSS.
                     </p>
-                    <p className="text-white/60">
+                    <p className="text-sm md:text-base text-white/60">
                         Building decentralized solutions at{' '}
                         <a
                             className="text-white/90 hover:underline hover:cursor-pointer"
