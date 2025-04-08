@@ -13,7 +13,7 @@ function App() {
         title1="Crafting intuitive Web3 frontends,"
         title2="powered by robust full-stack solutions." />
         </div>
-      <div className="" id="about">
+      <div className="  " id="about">
         <About />
       </div>
 
