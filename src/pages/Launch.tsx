@@ -72,7 +72,7 @@ function ElegantShape({
   );
 }
 
-function HeroGeometric({
+function Launch({
   badge = "Design Collective",
   title1 = "Elevate Your Digital Vision",
   title2 = "Crafting Exceptional Websites",
@@ -242,4 +242,4 @@ function HeroGeometric({
   );
 }
 
-export { HeroGeometric };
+export { Launch };
