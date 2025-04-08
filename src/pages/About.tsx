@@ -46,8 +46,8 @@ const About = () => {
                                 </a>
                             </div>
                         </div>
-                        <p className=" md:text-xl font-semibold">
-                            Full-stack developer (MERN) with a focus on building user-friendly front-ends using ReactJS (Vite), NextJS, and Tailwind CSS.
+                        <p className=" md:text-xl font-light">
+                            Full-stack developer (MERN) with a focus on <span className=" bricolage-font italic font-semibold">building user-friendly front-ends</span> using ReactJS (Vite), NextJS, and Tailwind CSS.
                         </p>
                         <p className="text-sm md:text-base text-white/60">
                             Building decentralized solutions at{' '}
@@ -81,7 +81,7 @@ const About = () => {
                                     <p className=" text-white/60 flex items-center gap-1">
                                         <Earth size={20} className=" text-gray-500" />Based in
                                     </p>
-                                    <p className=" italic">Chennai, India</p>
+                                    <p className=" italic bricolage-font">Chennai, India</p>
                                 </div>
                             </div>
                             <div className=" relative z-50 text-white text-2xl flex items-center mb-3">
@@ -89,7 +89,7 @@ const About = () => {
                                     <p className=" text-white/60 flex items-center gap-1">
                                         <Activity size={20} className=" text-gray-500" />Actively looking for
                                     </p>
-                                    <p className=" italic">Full-time roles</p>
+                                    <p className=" italic bricolage-font">Full-time roles</p>
                                 </div>
                             </div>
                             <div className="group transition-all duration-300 bg-black border border-white/[0.15] p-2 px-4 w-fit rounded-xl hover:border-white/30 hover:scale-105 text-white">
