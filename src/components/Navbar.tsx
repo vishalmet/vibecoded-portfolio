@@ -16,14 +16,14 @@ import {
       icon: (
         <HomeIcon className='h-full w-full text-neutral-300' />
       ),
-      href: '#',
+      href: '#home',
     },
     {
-      title: 'Products',
+      title: 'About',
       icon: (
-        <Package className='h-full w-full text-neutral-300' />
+        <ScrollText className='h-full w-full text-neutral-300' />
       ),
-      href: '#',
+      href: '#about',
     },
     {
       title: 'Components',
@@ -42,7 +42,7 @@ import {
     {
       title: 'Change Log',
       icon: (
-        <ScrollText className='h-full w-full text-neutral-300' />
+        <Package className='h-full w-full text-neutral-300' />
       ),
       href: '#',
     },
@@ -53,20 +53,18 @@ import {
       ),
       href: '#',
     },
-    {
-      title: 'Theme',
-      icon: (
-        <SunMoon className='h-full w-full text-neutral-300' />
-      ),
-      href: '#',
-    },
   ];
   
   export function Navbar() {
     return (
       <div className=' fixed bottom-2 left-1/2 max-w-full -translate-x-1/2 z-50'>
-        <Dock className='items-end pb-3  bg-gradient-to-r from-amber-500/10 via-black to-amber-500/10 backdrop-blur-[2px] border-2 border-white/[0.15]'>
+        <Dock className='items-end pb-3  bg-gradient-to-r from-amber-500/10 via-black to-amber-500/10 backdrop-blur-[2px] border-2 border-white/[0.15] hover:cursor-pointer'>
           {data.map((item, idx) => (
+            <div className=""
+            onClick={(e) => {
+              e.preventDefault()
+              document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' })
+            }}>
             <DockItem
               key={idx}
               className='aspect-square rounded-full bg-amber-500/10'
@@ -74,6 +72,7 @@ import {
               <DockLabel>{item.title}</DockLabel>
               <DockIcon>{item.icon}</DockIcon>
             </DockItem>
+            </div>
           ))}
         </Dock>
       </div>
