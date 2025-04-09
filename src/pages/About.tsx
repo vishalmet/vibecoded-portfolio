@@ -1,8 +1,18 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Meteors } from "@/components/ui/meteors";
 import { Twitter, Linkedin, Mail, CircleArrowRight, Github, Earth, Activity } from "lucide-react";
 
 const About = () => {
+
+    const messageTemplate = `Hello Vishal,\n\nI would like to get in touch with you.\n\nRegards,\n[Your Name]`;
+
+    const handleGetInTouch = () => {
+        const phoneNumber = import.meta.env.VITE_MOBILE_NUMBER;
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageTemplate)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
     return (
         <div className=" bg-black flex justify-center items-center">
             <div className=" space-y-3 md:space-y-0 md:gap-2 md:flex items-center h-auto m-4 my-10 md:m-10 md:my-24">
@@ -92,12 +102,12 @@ const About = () => {
                                     <p className=" italic bricolage-font">Full-time roles</p>
                                 </div>
                             </div>
-                            <div className="group transition-all duration-300 bg-black border border-white/[0.15] p-2 px-4 w-fit rounded-xl hover:border-white/30 hover:scale-105 text-white">
-                                <span className="flex items-center gap-2">
+                            <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex"
+                              onClick={handleGetInTouch}
+                            >
                                     Get in touch
                                     <CircleArrowRight size={20} className="transition-transform duration-300 group-hover:-rotate-30" />
-                                </span>
-                            </div>
+                            </Button>
                             <Meteors number={20} />
                         </div>
                     </div>
