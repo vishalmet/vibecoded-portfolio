@@ -43,7 +43,7 @@ const About = () => {
                     </svg>
                 </div>
                 <div className=" space-y-3 md:space-y-0 md:gap-2 md:flex justify-center items-center h-auto">
-                    <Card className=" text-white max-w-[650px] ">
+                    <Card className=" text-white max-w-[650px] group">
                         <CardContent className=" space-y-3 md:space-y-6">
                             <div className=" md:flex gap-6 justify-between">
                                 <div className="">
@@ -89,7 +89,7 @@ const About = () => {
                             <p className="text-sm md:text-base text-white/60">
                                 Building decentralized solutions at{' '}
                                 <a
-                                    className="text-white/90 hover:underline hover:cursor-pointer"
+                                    className="text-white/90 group-hover:text-amber-500/80 hover:underline hover:cursor-pointer"
                                     href="https://winks.fun"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -98,7 +98,7 @@ const About = () => {
                                 </a>{' '}
                                 and{' '}
                                 <a
-                                    className="text-white/90 hover:underline hover:cursor-pointer"
+                                    className="text-white/90 group-hover:text-amber-500/80 hover:underline hover:cursor-pointer"
                                     href="https://caddy.finance"
                                     target="_blank"
                                     rel="noopener noreferrer"
