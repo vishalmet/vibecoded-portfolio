@@ -5,6 +5,7 @@ import { Meteors } from "@/components/ui/meteors";
 import { Twitter, Linkedin, Mail, CircleArrowRight, Github, Earth, Activity } from "lucide-react";
 import { WiStars } from "react-icons/wi";
 import { GoNorthStar } from "react-icons/go";
+import ScrollVelocity from "@/components/scrollvelocity/scrollVelocity";
 
 
 
@@ -20,7 +21,7 @@ const About = () => {
 
     return (
         <div className=" bg-black flex justify-center items-center">
-            <div className=" m-4 my-10 md:m-10 md:my-24">
+            <div className=" m-4 my-10 md:m-10 md:my-24 overflow-x-hidden">
                 <div className=" text-white pb-10 text-3xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
                     <div className="flex items-center gap-1 font-extralight">
                         <WiStars className=" animate-pulse" /> About <WiStars className=" animate-pulse" />
@@ -154,6 +155,17 @@ const About = () => {
                         I bridge the gap between blockchain innovation and user experience. By crafting intuitive interfaces for decentralized applications, I make the complex world of Web3 accessible to everyone.
                     </ScrollReveal>
                 </div>
+
+                <ScrollVelocity
+                    texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
+                    velocity={100}
+                    className="custom-scroll-text text-4xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                />
+                <ScrollVelocity
+                    texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
+                    velocity={-100}
+                    className="custom-scroll-text text-4xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                />
             </div>
         </div>
     );
