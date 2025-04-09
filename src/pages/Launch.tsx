@@ -206,7 +206,7 @@ function Launch({
                 "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
               )}
             >
-              Frontend
+              Frontend Development
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 10, rotate: 30 }}
