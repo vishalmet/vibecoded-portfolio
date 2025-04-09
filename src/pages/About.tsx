@@ -1,8 +1,11 @@
+import ScrollReveal from "@/components/scrollreveal/scrollReveal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Meteors } from "@/components/ui/meteors";
 import { Twitter, Linkedin, Mail, CircleArrowRight, Github, Earth, Activity } from "lucide-react";
 import { WiStars } from "react-icons/wi";
+import { GoNorthStar } from "react-icons/go";
+
 
 
 const About = () => {
@@ -22,18 +25,18 @@ const About = () => {
                     <div className="flex items-center gap-1 font-extralight">
                         <WiStars className=" animate-pulse" /> About <WiStars className=" animate-pulse" />
                     </div>
-                    <svg 
-                        width="150" 
-                        height="30" 
-                        viewBox="0 0 200 30" 
-                        fill="none" 
+                    <svg
+                        width="150"
+                        height="30"
+                        viewBox="0 0 200 30"
+                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         className=""
                     >
-                        <path 
-                            d="M10 15C40 5, 160 5, 190 15" 
-                            stroke="white" 
-                            strokeWidth="2" 
+                        <path
+                            d="M10 15C40 5, 160 5, 190 15"
+                            stroke="white"
+                            strokeWidth="2"
                             strokeLinecap="round"
                             className="opacity-50"
                         />
@@ -126,16 +129,32 @@ const About = () => {
                                         <p className=" italic bricolage-font">Full-time roles</p>
                                     </div>
                                 </div>
-                                <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full md:text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex"
+                                <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full md:text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex gap-2"
                                     onClick={handleGetInTouch}
                                 >
+                                    <GoNorthStar size={20} className="transition-all duration-500 group-hover:rotate-30 group-hover:text-amber-400 animate-float" />
                                     Get in touch
-                                    <CircleArrowRight size={20} className="transition-transform duration-300 group-hover:-rotate-30" />
+                                    <GoNorthStar size={20} className="transition-all duration-500 group-hover:-rotate-30 group-hover:text-amber-400 animate-float-delayed" />
                                 </Button>
                                 <Meteors number={20} />
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className="mt-20 max-w-[800px] mx-auto">
+                    <ScrollReveal
+                        baseOpacity={0}
+                        enableBlur={true}
+                        baseRotation={2}
+                        blurStrength={5}
+                        containerClassName="text-white/80"
+                        textClassName="text-lg md:text-2xl font-light bricolage-font italic text-center"
+                    >
+                        When does a man die? When he is hit by a bullet? No! When he suffers a disease?
+                        No! When he ate a soup made out of a poisonous mushroom?
+                        No! A man dies when he is forgotten!
+                    </ScrollReveal>
                 </div>
             </div>
         </div>

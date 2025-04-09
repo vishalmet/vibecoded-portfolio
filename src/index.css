@@ -129,3 +129,20 @@
 .animate-meteor-effect {
   animation: meteor-effect 5s linear infinite;
 }
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0); 
+  }
+  50% { 
+    transform: translateY(-3px) rotate(5deg); 
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 3s ease-in-out infinite 1.5s;
+}
