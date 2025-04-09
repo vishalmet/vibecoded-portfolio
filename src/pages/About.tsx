@@ -143,7 +143,12 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="mt-20 max-w-[800px] mx-auto">
+                <ScrollVelocity
+                    texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
+                    velocity={100}
+                    className="custom-scroll-text text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                />
+                <div className="my-10 max-w-[800px] mx-auto">
                     <ScrollReveal
                         baseOpacity={0}
                         enableBlur={true}
@@ -156,15 +161,11 @@ const About = () => {
                     </ScrollReveal>
                 </div>
 
-                <ScrollVelocity
-                    texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
-                    velocity={100}
-                    className="custom-scroll-text text-4xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
-                />
+              
                 <ScrollVelocity
                     texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
                     velocity={-100}
-                    className="custom-scroll-text text-4xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                    className="custom-scroll-text text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
             </div>
         </div>
