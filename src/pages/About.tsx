@@ -149,11 +149,9 @@ const About = () => {
                         baseRotation={2}
                         blurStrength={5}
                         containerClassName="text-white/80"
-                        textClassName="text-lg md:text-2xl font-light bricolage-font italic text-center"
+                        textClassName="text-lg md:text-2xl font-extralight bricolage-font italic text-center"
                     >
-                        When does a man die? When he is hit by a bullet? No! When he suffers a disease?
-                        No! When he ate a soup made out of a poisonous mushroom?
-                        No! A man dies when he is forgotten!
+                        I bridge the gap between blockchain innovation and user experience. By crafting intuitive interfaces for decentralized applications, I make the complex world of Web3 accessible to everyone.
                     </ScrollReveal>
                 </div>
             </div>
