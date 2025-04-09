@@ -18,8 +18,8 @@ const About = () => {
     return (
         <div className=" bg-black flex justify-center items-center">
             <div className=" m-4 my-10 md:m-10 md:my-24">
-                <div className=" text-white pb-10 text-3xl text-center bricolage-font font-light flex flex-col justify-center items-center mx-auto gap-1">
-                    <div className="flex items-center gap-1">
+                <div className=" text-white pb-10 text-3xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
+                    <div className="flex items-center gap-1 font-extralight">
                         <WiStars className=" animate-pulse" /> About <WiStars className=" animate-pulse" />
                     </div>
                     <svg 
@@ -110,7 +110,7 @@ const About = () => {
                         <div className=" w-full relative min-w-[300px]">
                             <Card className="absolute inset-0 h-full w-full transform scale-[0.80] rounded-full blur-3xl" />
                             <div className="relative bg-[#121212] h-full overflow-hidden rounded-3xl p-6 md:p-10 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300">
-                                <div className=" relative z-50 text-white text-2xl flex items-center mb-3">
+                                <div className=" relative z-50 text-white text-lg md:text-2xl flex items-center mb-3">
                                     <div className="">
                                         <p className=" text-white/60 flex items-center gap-1">
                                             <Earth size={20} className=" text-gray-500" />Based in
@@ -118,7 +118,7 @@ const About = () => {
                                         <p className=" italic bricolage-font">Chennai, India</p>
                                     </div>
                                 </div>
-                                <div className=" relative z-50 text-white text-2xl flex items-center mb-3">
+                                <div className=" relative z-50 text-white text-lg md:text-2xl flex items-center mb-3">
                                     <div className="">
                                         <p className=" text-white/60 flex items-center gap-1">
                                             <Activity size={20} className=" text-gray-500" />Actively looking for
@@ -126,7 +126,7 @@ const About = () => {
                                         <p className=" italic bricolage-font">Full-time roles</p>
                                     </div>
                                 </div>
-                                <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex"
+                                <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full md:text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex"
                                     onClick={handleGetInTouch}
                                 >
                                     Get in touch
