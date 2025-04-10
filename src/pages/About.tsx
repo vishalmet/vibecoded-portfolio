@@ -172,7 +172,7 @@ const About = () => {
                     <GitHubCalendar
                         username="vishalmet"
                         blockSize={10}
-                        blockMargin={5}
+                        blockMargin={3}
                         fontSize={16}
                     />
                 </div>
