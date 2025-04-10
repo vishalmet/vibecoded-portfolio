@@ -7,6 +7,7 @@ import { PiStarFourLight } from "react-icons/pi";
 import { GoNorthStar } from "react-icons/go";
 import ScrollVelocity from "@/components/scrollvelocity/scrollVelocity";
 import ShinyText from "@/components/shinyText.jsx"
+import GitHubCalendar from "react-github-calendar";
 
 
 
@@ -167,7 +168,14 @@ const About = () => {
                     velocity={-100}
                     className="custom-scroll-text text-base md:text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
-
+<div className=" text-white flex justify-center">
+                <GitHubCalendar
+                    username="vishalmet"
+                    blockSize={10}
+                    blockMargin={5}
+                    fontSize={16}
+                />
+                </div>
             </div>
         </div>
     );
