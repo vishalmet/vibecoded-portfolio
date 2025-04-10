@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Meteors } from "@/components/ui/meteors";
 import { Twitter, Linkedin, Mail, CircleArrowRight, Github, Earth, Activity } from "lucide-react";
-import { WiStars } from "react-icons/wi";
+import { PiStarFourLight } from "react-icons/pi";
 import { GoNorthStar } from "react-icons/go";
 import ScrollVelocity from "@/components/scrollvelocity/scrollVelocity";
+import ShinyText from "@/components/shinyText.jsx"
 
 
 
@@ -22,12 +23,12 @@ const About = () => {
     return (
         <div className=" bg-black flex justify-center items-center">
             <div className=" m-4 my-10 md:m-10 md:my-24 overflow-x-hidden">
-                <div className=" text-white pb-10 text-3xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
-                    <div className="flex items-center gap-1 font-extralight">
-                        <WiStars className=" animate-pulse" /> About <WiStars className=" animate-pulse" />
+                <div className=" text-white pb-10 text-5xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
+                    <div className="flex items-center gap-1 font-bold">
+                        <PiStarFourLight className=" animate-float" />  <ShinyText text="About" disabled={false} speed={3} className='custom-class text-7xl font-bold' /> <PiStarFourLight className=" animate-float" />
                     </div>
                     <svg
-                        width="150"
+                        width="230"
                         height="30"
                         viewBox="0 0 200 30"
                         fill="none"
@@ -39,7 +40,7 @@ const About = () => {
                             stroke="white"
                             strokeWidth="2"
                             strokeLinecap="round"
-                            className="opacity-50"
+                            className="opacity-50 animate-float"
                         />
                     </svg>
                 </div>
