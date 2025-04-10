@@ -166,6 +166,7 @@ const About = () => {
                     velocity={-100}
                     className="custom-scroll-text text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
+                
             </div>
         </div>
     );
