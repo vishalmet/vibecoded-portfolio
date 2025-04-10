@@ -157,7 +157,7 @@ const About = () => {
                         containerClassName="text-white/80"
                         textClassName="text-lg md:text-2xl font-extralight bricolage-font italic text-center"
                     >
-                        I bridge the gap between blockchain innovation and user experience. By crafting intuitive interfaces for decentralized applications, I make the complex world of Web3 accessible to everyone.
+                        I bridge the gap between blockchain innovation and user experience. By crafting intuitive interfaces for decentralized applications, making the complex world of Web3 accessible to everyone.
                     </ScrollReveal>
                 </div>
 
