@@ -144,7 +144,7 @@ const About = () => {
                 </div>
 
                 <ScrollVelocity
-                    texts={['HTML', 'CSS', 'JS', 'TailwindCSS', 'NextJS', 'ReactJS', 'AnimeJS', 'Framer-Motion', 'NodeJS', 'Canva', 'Figma', 'Adobe Xd', 'Python', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP']}
+                    texts={['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'TailwindCSS', 'NextJS', 'ReactJS', 'ViteJS', 'AnimeJS', 'Framer-Motion', 'Canva', 'Figma', 'Adobe Xd', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP', 'NodeJS', 'ExpressJS', 'MongoDB', 'React Router', 'Redux']}
                     velocity={100}
                     className="custom-scroll-text text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
@@ -166,7 +166,7 @@ const About = () => {
                     velocity={-100}
                     className="custom-scroll-text text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
-                
+
             </div>
         </div>
     );
