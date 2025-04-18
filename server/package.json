@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Basic Node.js server",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "@types/express": "^4.17.17",
+    "@types/cors": "^2.8.13",
+    "@types/node": "^20.5.7",
+    "@types/mongoose": "^5.11.97"
+  }
+} 
