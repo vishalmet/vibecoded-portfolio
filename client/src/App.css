@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@100..900&family=Wendy+One&display=swap');
 
 
 .outfit-font {
@@ -9,6 +9,9 @@
     font-family: "Bricolage Grotesque", sans-serif;
   }
 
+  .wendy-font {
+    font-family: 'Wendy One', sans-serif;
+  }
 
   .shiny-text {
     color: #eeeeeea4; /* Adjust this color to change intensity/style */

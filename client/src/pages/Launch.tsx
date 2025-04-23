@@ -186,54 +186,11 @@ function Launch({
             animate="visible"
             className="relative"
           >
-            <motion.div
-              initial={{ opacity: 0, y: -20, rotate: -30 }}
-              animate={{ opacity: 1, y: [0, 10, 0], rotate: -30 }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-              }}
-              className={cn(
-                "w-fit h-fit p-3 px-6 text-white",
-                "absolute left-[-100px] rounded-full",
-                "bg-gradient-to-r to-transparent",
-                "from-white/[0.08]",
-                "backdrop-blur-[2px] border-2 border-white/[0.15]",
-                "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-                "after:absolute after:inset-0 after:rounded-full",
-                "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
-              )}
-            >
-              Frontend Development
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10, rotate: 30 }}
-              animate={{ opacity: 1, y: [0, 10, 0], rotate: 30 }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-              }}
-              className={cn(
-                "w-fit h-fit p-3 px-6 text-white",
-                "absolute right-[-100px] rounded-full",
-                "bg-gradient-to-r to-transparent",
-                "from-white/[0.08]",
-                "backdrop-blur-[2px] border-2 border-white/[0.15]",
-                "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-                "after:absolute after:inset-0 after:rounded-full",
-                "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
-              )}
-            >
-              Web3 Integrations
-            </motion.div>
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+          
+            {/* <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Crafting exceptional digital experiences through innovative design
               and cutting-edge technology.
-            </p>
+            </p> */}
           </motion.div>
         </div>
       </div>
