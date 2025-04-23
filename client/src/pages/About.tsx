@@ -132,7 +132,7 @@ const About = () => {
                                         <p className=" italic bricolage-font">Full-time roles</p>
                                     </div>
                                 </div>
-                                <Button className="group transition-all duration-300 bg-black border border-white/[0.15] p-5 w-full md:text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white flex gap-2"
+                                <Button className="group transition-all duration-300 w-full flex gap-2"
                                     onClick={handleGetInTouch}
                                 >
                                     <GoNorthStar size={20} className="transition-all duration-500 group-hover:rotate-30 group-hover:text-amber-400 animate-float" />
