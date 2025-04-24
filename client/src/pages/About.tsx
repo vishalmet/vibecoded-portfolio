@@ -148,7 +148,7 @@ const About = () => {
                 <ScrollVelocity
                     texts={['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'TailwindCSS', 'NextJS', 'ReactJS', 'ViteJS', 'AnimeJS', 'Framer-Motion', 'Canva', 'Figma', 'Adobe Xd', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP', 'NodeJS', 'ExpressJS', 'MongoDB', 'React Router', 'Redux']}
                     velocity={100}
-                    className="custom-scroll-text text-base md:text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                    className="custom-scroll-text wendy-font text-base md:text-2xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
                 <div className="my-10 max-w-[800px] mx-auto">
                     <ScrollReveal
@@ -166,7 +166,7 @@ const About = () => {
                 <ScrollVelocity
                     texts={['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'TailwindCSS', 'NextJS', 'ReactJS', 'ViteJS', 'AnimeJS', 'Framer-Motion', 'Canva', 'Figma', 'Adobe Xd', 'Solidity', 'Web3JS', 'Vercel', 'Digital Ocean', 'Shadcn', 'GSAP', 'NodeJS', 'ExpressJS', 'MongoDB', 'React Router', 'Redux']}
                     velocity={-100}
-                    className="custom-scroll-text text-base md:text-3xl bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
+                    className="custom-scroll-text text-base md:text-2xl wendy-font bg-[#121212] w-fit rounded-3xl p-3 md:p-6 border border-white/[0.15] shadow-inner hover:shadow-amber-500/50 transition-all duration-300 m-4"
                 />
                 <div className=" text-white flex justify-center">
                     <GitHubCalendar
