@@ -24,9 +24,9 @@ const About = () => {
     return (
         <div className=" bg-black flex justify-center items-center">
             <div className=" m-4 my-10 md:m-10 md:my-24 overflow-x-hidden">
-                <div className=" text-white pb-10 text-5xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
+                <div className=" text-white pb-10 text-4xl md:text-6xl text-center bricolage-font flex flex-col justify-center items-center mx-auto gap-1">
                     <div className="flex items-center gap-1 font-bold">
-                        <GoNorthStar className=" animate-float opacity-80" />  <ShinyText text="About" disabled={false} speed={3} className='custom-class text-7xl font-semibold' /> <GoNorthStar className=" animate-float opacity-80" />
+                        <GoNorthStar className=" animate-float opacity-80" />  <ShinyText text="About" disabled={false} speed={3} className='custom-class font-semibold' /> <GoNorthStar className=" animate-float opacity-80" />
                     </div>
                     <svg
                         width="230"

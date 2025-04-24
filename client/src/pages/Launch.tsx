@@ -233,7 +233,7 @@ export default function Launch() {
             }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8"
           >
-            <span className="text-sm text-white/60 tracking-wide flex items-center gap-2">
+            <span className="text-xs md:text-sm text-white/60 tracking-wide flex items-center gap-1 md:gap-2">
               Web3 Frontend Developer
               <Circle className="h-2 w-2 fill-rose-500/80" />
               MERN Stack Developer
