@@ -3,6 +3,7 @@ import "./App.css";
 import { Navbar } from "./components/Navbar.tsx";
 import About from "./pages/About.tsx";
 import Launch from "./pages/Launch.tsx";
+import Projects from "./pages/Projects.tsx";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         </div>
       <div className="  " id="about">
         <About />
+      </div>
+      <div className="  " id="projects">
+        <Projects />
       </div>
 
     </div>
