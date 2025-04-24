@@ -26,18 +26,18 @@ import {
       href: '#about',
     },
     {
-      title: 'Components',
+      title: 'Projects',
       icon: (
         <Component className='h-full w-full text-neutral-300' />
       ),
-      href: '#',
+      href: '#projects',
     },
     {
-      title: 'Activity',
+      title: 'Experience',
       icon: (
         <Activity className='h-full w-full text-neutral-300' />
       ),
-      href: '#',
+      href: '#experience',
     },
     {
       title: 'Change Log',

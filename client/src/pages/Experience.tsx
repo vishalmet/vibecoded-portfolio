@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PiStarFourFill } from "react-icons/pi";
 import { FaExternalLinkAlt, FaBuilding, FaCalendarAlt, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -71,11 +71,13 @@ const experiences = [
 const ExperienceCard = ({ experience, index }: { experience: typeof experiences[0]; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
 
+    // Initial animation
     gsap.fromTo(
       card,
       {
@@ -96,6 +98,17 @@ const ExperienceCard = ({ experience, index }: { experience: typeof experiences[
         },
       }
     );
+
+    // In-view animation
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => setIsInView(true),
+      onLeave: () => setIsInView(false),
+      onEnterBack: () => setIsInView(true),
+      onLeaveBack: () => setIsInView(false),
+    });
   }, [index]);
 
   const toggleExpand = () => {
@@ -103,7 +116,7 @@ const ExperienceCard = ({ experience, index }: { experience: typeof experiences[
   };
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
       className={cn(
         "group relative flex gap-8 p-6 rounded-xl border border-white/[0.15] bg-black/50 backdrop-blur-sm",
@@ -112,6 +125,12 @@ const ExperienceCard = ({ experience, index }: { experience: typeof experiences[
         "after:absolute after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:rounded-full after:bg-amber-500/80",
         index % 2 === 0 ? "after:-right-2" : "after:-left-2"
       )}
+      animate={{
+        scale: isInView ? 1.02 : 1,
+        boxShadow: isInView ? "0 0 30px rgba(245, 158, 11, 0.3)" : "none",
+        borderColor: isInView ? "rgba(245, 158, 11, 0.5)" : "rgba(255, 255, 255, 0.15)",
+      }}
+      transition={{ duration: 0.3 }}
     >
       <div className="relative z-10 flex-1">
         <div className="flex items-start gap-4 mb-4">
@@ -183,63 +202,55 @@ const ExperienceCard = ({ experience, index }: { experience: typeof experiences[
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function Experience() {
-  const titleRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const title = titleRef.current;
-    const container = containerRef.current;
-    if (!title || !container) return;
+    const cards = document.querySelectorAll('.experience-card');
+    const timeline = timelineRef.current;
+    if (!timeline) return;
 
-    // Title animation
-    gsap.fromTo(
-      title,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: title,
-          start: "top bottom-=100",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+    cards.forEach((card, index) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveCardIndex(index),
+        onLeave: () => setActiveCardIndex(null),
+        onEnterBack: () => setActiveCardIndex(index),
+        onLeaveBack: () => setActiveCardIndex(null),
+      });
+    });
 
-    // Background elements animation
-    const bgElements = container.querySelectorAll(".bg-element");
-    bgElements.forEach((element, index) => {
-      gsap.fromTo(
-        element,
-        {
-          opacity: 0,
-          scale: 0.8,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          delay: index * 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: container,
-            start: "top bottom",
-            toggleActions: "play none none reverse",
-          },
+    // Timeline line animation
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top center",
+      end: "bottom center",
+      onUpdate: (self) => {
+        const progress = self.progress;
+        if (timeline) {
+          timeline.style.height = `${progress * 100}%`;
         }
-      );
+      },
     });
   }, []);
+
+  const timelineColor = useMemo(() => {
+    if (activeCardIndex === null) return "rgba(99, 102, 241, 0.3)";
+    const colors = [
+      "rgba(99, 102, 241, 0.3)",    // indigo
+      "rgba(245, 158, 11, 0.5)",    // amber
+      "rgba(244, 63, 94, 0.3)",     // rose
+    ];
+    return colors[activeCardIndex % colors.length];
+  }, [activeCardIndex]);
 
   return (
     <div ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-20 overflow-hidden">
@@ -251,7 +262,7 @@ export default function Experience() {
       </div>
 
       <div className="container relative mx-auto px-4">
-        <div ref={titleRef} className="mb-16 text-center">
+        <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.03] border border-white/[0.08] px-3 py-1 mb-4">
             <span className="text-xs md:text-sm text-white/60 tracking-wide flex items-center gap-1 md:gap-2">
               Professional Journey
@@ -267,15 +278,23 @@ export default function Experience() {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/[0.1] -translate-x-1/2" />
+          {/* Animated timeline line */}
+          <motion.div
+            ref={timelineRef}
+            className="absolute left-1/2 top-0 w-1 -translate-x-1/2"
+            style={{
+              background: timelineColor,
+              boxShadow: `0 0 20px ${timelineColor}`,
+              height: "0%",
+            }}
+          />
 
           <div className="space-y-8">
             {experiences.map((experience, index) => (
               <div
                 key={experience.id}
                 className={cn(
-                  "relative",
+                  "relative experience-card",
                   index % 2 === 0 ? "pr-8 md:pr-0 md:pl-8" : "pl-8 md:pl-0 md:pr-8"
                 )}
               >
