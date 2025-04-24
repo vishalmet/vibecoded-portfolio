@@ -7,6 +7,7 @@ import { Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PiStarFourFill } from "react-icons/pi";
+import { GoNorthStar } from "react-icons/go";
 // import { Navbar } from "@/components/Navbar";
 
 function ElegantShape({
@@ -265,22 +266,17 @@ export default function Launch() {
               delay: 1.1,
               ease: [0.25, 0.4, 0.25, 1],
             }}
-            className="flex gap-1 justify-center items-center group"
+            className="flex gap-1 hover:gap-2 justify-center items-center group"
           >
-            <div className="bg-black border border-white/[0.15] md:text-xl rounded-xl hover:border-white/30 hover:scale-105 text-white p-2 shadow-xs flexx justify-center items-center group-hover:bg-amber-500/10 group-hover:scale-105 opacity-80">
-              <PiStarFourFill />
-            </div>
+            <span className="bg-black border border-white/[0.15] md:text-xl rounded-xl w-fit hover:border-white/30 hover:scale-105 text-white p-2 shadow-xs flexx justify-center items-center group-hover:bg-amber-500/10 transition-all group-hover:scale-105 opacity-80">
+              <GoNorthStar />
+            </span>
             <Button
+              onClick={() => window.open("https://drive.google.com/file/d/1VQ1c81pe89LXu8IGlpfd5Oadd3h678K3/view?usp=sharing", "_blank")}
               className=" "
             >
               Resume
             </Button>
-            {/* <a
-              href="#contact"
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-rose-500 hover:from-indigo-600 hover:to-rose-600 text-white transition-colors duration-300"
-            >
-              Get In Touch
-            </a> */}
           </motion.div>
         </div>
       </div>
