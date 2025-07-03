@@ -11,64 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Sample experience data with multiple roles in same organization
-const experiences = [
-  {
-    id: 1,
-    roles: [
-      {
-        role: "Senior Web3 Frontend Developer",
-        description: "Leading the development of DeFi platforms and implementing advanced Web3 features. Mentoring junior developers and setting technical standards.",
-        startDate: "Jan 2024",
-        endDate: "Present",
-      },
-      {
-        role: "Web3 Frontend Developer",
-        description: "Developed and maintained frontend applications for decentralized finance (DeFi) platforms. Implemented Web3.js integration and smart contract interactions.",
-        startDate: "Jan 2023",
-        endDate: "Dec 2023",
-      }
-    ],
-    organization: "Blockchain Solutions Inc.",
-    logo: "/experience/blockchain-solutions.png",
-    website: "https://blockchainsolutions.com",
-  },
-  {
-    id: 2,
-    roles: [
-      {
-        role: "Senior React Developer",
-        description: "Led the frontend development team in building enterprise-level React applications. Implemented advanced state management and performance optimizations.",
-        startDate: "Mar 2021",
-        endDate: "Dec 2022",
-      },
-      {
-        role: "React Developer",
-        description: "Developed and maintained React applications, implemented new features, and optimized performance.",
-        startDate: "Jun 2020",
-        endDate: "Feb 2021",
-      }
-    ],
-    organization: "Tech Innovations Ltd",
-    logo: "/experience/tech-innovations.png",
-    website: "https://techinnovations.com",
-  },
-  {
-    id: 3,
-    roles: [
-      {
-        role: "Full Stack Developer",
-        description: "Developed full-stack applications using MERN stack. Implemented RESTful APIs and real-time features using WebSocket.",
-        startDate: "Jun 2019",
-        endDate: "Feb 2021",
-      }
-    ],
-    organization: "Digital Creations",
-    logo: "/experience/digital-creations.png",
-  },
-];
-
-const ExperienceCard = ({ experience, index }: { experience: typeof experiences[0]; index: number }) => {
+const ExperienceCard = ({ experience, index }: { experience: any; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -186,7 +129,7 @@ const ExperienceCard = ({ experience, index }: { experience: typeof experiences[
 
         {isExpanded && experience.roles.length > 1 && (
           <div className="mt-6 space-y-6">
-            {experience.roles.slice(1).map((role, roleIndex) => (
+            {experience.roles.slice(1).map((role: any, roleIndex: number) => (
               <div
                 key={roleIndex}
                 className="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white/[0.1]"
@@ -210,6 +153,25 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+  const [experiences, setExperiences] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/experience')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch experience data');
+        return res.json();
+      })
+      .then(data => {
+        setExperiences(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     const cards = document.querySelectorAll('.experience-card');
@@ -240,7 +202,7 @@ export default function Experience() {
         }
       },
     });
-  }, []);
+  }, [experiences]);
 
   const timelineColor = useMemo(() => {
     if (activeCardIndex === null) return "rgba(99, 102, 241, 0.3)";
@@ -251,6 +213,13 @@ export default function Experience() {
     ];
     return colors[activeCardIndex % colors.length];
   }, [activeCardIndex]);
+
+  if (loading) {
+    return <div className="text-white text-center py-20">Loading experience...</div>;
+  }
+  if (error) {
+    return <div className="text-red-500 text-center py-20">{error}</div>;
+  }
 
   return (
     <div ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-20 overflow-hidden">
@@ -292,7 +261,7 @@ export default function Experience() {
           <div className="space-y-8">
             {experiences.map((experience, index) => (
               <div
-                key={experience.id}
+                key={experience._id || index}
                 className={cn(
                   "relative experience-card",
                   index % 2 === 0 ? "pr-8 md:pr-0 md:pl-8" : "pl-8 md:pl-0 md:pr-8"
