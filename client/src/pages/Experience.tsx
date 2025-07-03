@@ -96,6 +96,10 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
                   <FaCalendarAlt className="h-3 w-3" />
                   <span>{experience.roles[0].startDate} - {experience.roles[0].endDate}</span>
                 </div>
+                {/* Tags display */}
+                {experience.tags && experience.tags.length > 0 && (
+                  <TagsDisplay tags={experience.tags} />
+                )}
               </div>
               {experience.roles.length > 1 && (
                 <Button
@@ -115,6 +119,20 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
 
         <p className="text-white/60 text-sm mb-4">{experience.roles[0].description}</p>
 
+        {/* Role-level website for first role */}
+        {experience.roles[0].website && (
+          <a
+            href={experience.roles[0].website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-2"
+          >
+            <FaExternalLinkAlt className="h-4 w-4" />
+            <span className="text-sm">Visit Website</span>
+          </a>
+        )}
+
+        {/* Organization website */}
         {experience.website && (
           <a
             href={experience.website}
@@ -140,6 +158,18 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
                   <span>{role.startDate} - {role.endDate}</span>
                 </div>
                 <p className="text-white/60 text-sm">{role.description}</p>
+                {/* Role-level website for expanded roles */}
+                {role.website && (
+                  <a
+                    href={role.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-2"
+                  >
+                    <FaExternalLinkAlt className="h-4 w-4" />
+                    <span className="text-sm">Visit Website</span>
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -148,6 +178,36 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
     </motion.div>
   );
 };
+
+function TagsDisplay({ tags }: { tags: string[] }) {
+  const [showAll, setShowAll] = useState(false);
+  const visibleTags = showAll ? tags : tags.slice(0, 4);
+  return (
+    <div className="flex flex-wrap gap-2 mt-2">
+      {visibleTags.map((tag, i) => (
+        <span key={i} className="bg-indigo-600 text-white px-2 py-1 rounded text-xs">{tag}</span>
+      ))}
+      {tags.length > 4 && !showAll && (
+        <button
+          type="button"
+          className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+          onClick={() => setShowAll(true)}
+        >
+          +{tags.length - 4}
+        </button>
+      )}
+      {tags.length > 4 && showAll && (
+        <button
+          type="button"
+          className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+          onClick={() => setShowAll(false)}
+        >
+          Show less
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
