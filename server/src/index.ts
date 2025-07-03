@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
+import experienceRoutes from './routes/experience';
+import adminRoutes from './routes/admin';
 
 // Load environment variables
 dotenv.config();
@@ -20,6 +22,9 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the server!' });
 });
+
+app.use('/api/experience', experienceRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Start server
 app.listen(port, () => {
