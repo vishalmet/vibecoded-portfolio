@@ -125,10 +125,10 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
             href={experience.roles[0].website}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-2"
+            className="inline-flex items-center gap-2 mr-3 text-white/60 hover:text-white transition-colors mb-2"
           >
             <FaExternalLinkAlt className="h-4 w-4" />
-            <span className="text-sm">Visit Website</span>
+            <span className="text-sm">Visit Role Website</span>
           </a>
         )}
 
@@ -141,7 +141,7 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
             className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
           >
             <FaExternalLinkAlt className="h-4 w-4" />
-            <span className="text-sm">Visit Website</span>
+            <span className="text-sm">Visit Organization Website</span>
           </a>
         )}
 
@@ -167,7 +167,7 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
                     className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-2"
                   >
                     <FaExternalLinkAlt className="h-4 w-4" />
-                    <span className="text-sm">Visit Website</span>
+                    <span className="text-sm">Visit Role Website</span>
                   </a>
                 )}
               </div>
