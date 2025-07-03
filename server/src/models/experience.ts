@@ -13,6 +13,7 @@ export interface ExperienceDocument extends Document {
   logo: string;
   website?: string;
   roles: Role[];
+  tags?: string[];
 }
 
 const RoleSchema = new Schema<Role>({
@@ -28,6 +29,7 @@ const ExperienceSchema = new Schema<ExperienceDocument>({
   logo: { type: String, required: true },
   website: { type: String },
   roles: { type: [RoleSchema], required: true },
+  tags: { type: [String], default: [] },
 });
 
 export default mongoose.model<ExperienceDocument>('Experience', ExperienceSchema); 
