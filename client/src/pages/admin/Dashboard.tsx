@@ -11,9 +11,12 @@ export default function AdminDashboard() {
     website: '',
     roles: [
       { role: '', description: '', startDate: '', endDate: '', website: '' }
-    ]
+    ],
+    tags: [] as string[],
   });
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [tagInput, setTagInput] = useState('');
+  const [expandedTags, setExpandedTags] = useState<string[]>([]);
   const navigate = useNavigate();
 
   // Check if logged in
@@ -60,6 +63,21 @@ export default function AdminDashboard() {
     setForm({ ...form, roles: form.roles.filter((_, i) => i !== idx) });
   };
 
+  // Add tag
+  const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>) => {
+    if (("key" in e && e.key === 'Enter') || ("type" in e && e.type === 'click')) {
+      e.preventDefault();
+      const tag = tagInput.trim();
+      if (tag && !form.tags.includes(tag)) {
+        setForm({ ...form, tags: [...form.tags, tag] });
+      }
+      setTagInput('');
+    }
+  };
+  const handleRemoveTag = (tag: string) => {
+    setForm({ ...form, tags: form.tags.filter(t => t !== tag) });
+  };
+
   // Submit new or updated experience
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -100,7 +118,8 @@ export default function AdminDashboard() {
         startDate: r.startDate,
         endDate: r.endDate,
         website: r.website || ''
-      }))
+      })),
+      tags: exp.tags || [],
     });
   };
 
@@ -144,6 +163,28 @@ export default function AdminDashboard() {
         <input name="logo" value={form.logo} onChange={handleFormChange} placeholder="Logo URL" className="w-full p-2 mb-2 rounded bg-gray-700" required />
         <input name="website" value={form.website} onChange={handleFormChange} placeholder="Organization Website (optional)" className="w-full p-2 mb-2 rounded bg-gray-700" />
         <div className="mb-2">
+          <h4 className="font-semibold mb-2">Tags</h4>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {form.tags.map(tag => (
+              <span key={tag} className="bg-indigo-600 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                {tag}
+                <button type="button" onClick={() => handleRemoveTag(tag)} className="ml-1 text-white hover:text-red-300">&times;</button>
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={tagInput}
+              onChange={e => setTagInput(e.target.value)}
+              onKeyDown={handleAddTag}
+              placeholder="Add tag and press Enter"
+              className="w-full p-1 rounded bg-gray-700"
+            />
+            <button type="button" onClick={handleAddTag} className="bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-xs text-white">Add</button>
+          </div>
+        </div>
+        <div className="mb-2">
           <h4 className="font-semibold mb-2">Roles</h4>
           {form.roles.map((role, idx) => (
             <div key={idx} className="mb-2 p-2 bg-gray-700 rounded">
@@ -158,23 +199,54 @@ export default function AdminDashboard() {
           <button type="button" onClick={addRole} className="bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded text-xs mt-2">Add Role</button>
         </div>
         <button type="submit" className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold mt-2">{editingId ? 'Update' : 'Add'} Experience</button>
-        {editingId && <button type="button" onClick={() => { setEditingId(null); setForm({ organization: '', logo: '', website: '', roles: [{ role: '', description: '', startDate: '', endDate: '', website: '' }] }); }} className="ml-4 text-yellow-400">Cancel Edit</button>}
+        {editingId && <button type="button" onClick={() => { setEditingId(null); setForm({ organization: '', logo: '', website: '', roles: [{ role: '', description: '', startDate: '', endDate: '', website: '' }], tags: [] }); }} className="ml-4 text-yellow-400">Cancel Edit</button>}
       </form>
       <h3 className="text-xl font-semibold mb-4">All Experiences</h3>
       {loading ? <div>Loading...</div> : (
         <div className="space-y-4">
-          {experiences.map(exp => (
-            <div key={exp._id} className="bg-gray-800 p-4 rounded flex justify-between items-center">
-              <div>
-                <div className="font-bold">{exp.organization}</div>
-                <div className="text-sm text-gray-400">{exp.roles.map((r: any) => r.role).join(', ')}</div>
+          {experiences.map(exp => {
+            const showTags = exp.tags && exp.tags.length > 0;
+            const isExpanded = expandedTags.includes(exp._id);
+            const visibleTags = showTags ? (isExpanded ? exp.tags : exp.tags.slice(0, 4)) : [];
+            return (
+              <div key={exp._id} className="bg-gray-800 p-4 rounded flex justify-between items-center">
+                <div>
+                  <div className="font-bold">{exp.organization}</div>
+                  <div className="text-sm text-gray-400">{exp.roles.map((r: any) => r.role).join(', ')}</div>
+                  {/* Tags display */}
+                  {showTags && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {visibleTags.map((tag: string, i: number) => (
+                        <span key={i} className="bg-indigo-600 text-white px-2 py-1 rounded text-xs">{tag}</span>
+                      ))}
+                      {exp.tags.length > 4 && !isExpanded && (
+                        <button
+                          type="button"
+                          className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+                          onClick={() => setExpandedTags([...expandedTags, exp._id])}
+                        >
+                          +{exp.tags.length - 4}
+                        </button>
+                      )}
+                      {exp.tags.length > 4 && isExpanded && (
+                        <button
+                          type="button"
+                          className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+                          onClick={() => setExpandedTags(expandedTags.filter(id => id !== exp._id))}
+                        >
+                          Show less
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <button onClick={() => handleEdit(exp)} className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded mr-2">Edit</button>
+                  <button onClick={() => handleDelete(exp._id)} className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Delete</button>
+                </div>
               </div>
-              <div>
-                <button onClick={() => handleEdit(exp)} className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded mr-2">Edit</button>
-                <button onClick={() => handleDelete(exp._id)} className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Delete</button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
