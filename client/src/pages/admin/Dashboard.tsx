@@ -21,7 +21,7 @@ export default function AdminDashboard() {
 
   // Check if logged in
   useEffect(() => {
-    const adminPassword = localStorage.getItem('adminPassword');
+    const adminPassword = sessionStorage.getItem('adminPassword');
     if (!adminPassword) {
       navigate('/admin/login');
     }
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError('');
-    const adminPassword = localStorage.getItem('adminPassword');
+    const adminPassword = sessionStorage.getItem('adminPassword');
     if (!adminPassword) {
       navigate('/admin/login');
       return;
@@ -125,7 +125,7 @@ export default function AdminDashboard() {
 
   // Delete experience
   const handleDelete = async (id: string) => {
-    const adminPassword = localStorage.getItem('adminPassword');
+    const adminPassword = sessionStorage.getItem('adminPassword');
     if (!adminPassword) {
       navigate('/admin/login');
       return;
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
 
   // Logout
   const handleLogout = () => {
-    localStorage.removeItem('adminPassword');
+    sessionStorage.removeItem('adminPassword');
     navigate('/admin/login');
   };
 

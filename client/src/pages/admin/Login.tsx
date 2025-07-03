@@ -21,7 +21,7 @@ export default function AdminLogin() {
         throw new Error('Invalid password');
       }
       // On success, store password and navigate to dashboard
-      localStorage.setItem('adminPassword', password);
+      sessionStorage.setItem('adminPassword', password);
       navigate('/admin/dashboard');
     } catch (err: any) {
       setError(err.message || 'Login failed');
