@@ -23,7 +23,7 @@ router.post('/', async (req: Request, res: Response) => {
 // GET /api/experience - Get all experiences
 router.get('/', async (_req: Request, res: Response) => {
   try {
-    const experiences = await Experience.find();
+    const experiences = await Experience.find().sort({ _id: -1 });
     res.json(experiences);
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
