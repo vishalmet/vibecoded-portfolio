@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PiStarFourFill } from "react-icons/pi";
 import { FaExternalLinkAlt, FaBuilding, FaCalendarAlt, FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -164,7 +164,7 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
                     href={role.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-2"
+                    className="inline-flex items-center gap-2 mt-2 text-white/60 hover:text-white transition-colors mb-2"
                   >
                     <FaExternalLinkAlt className="h-4 w-4" />
                     <span className="text-sm">Visit Role Website</span>

@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Contact } from "lucide-react";
 import "./App.css";
 import { Navbar } from "./components/Navbar.tsx";
 import About from "./pages/About.tsx";
