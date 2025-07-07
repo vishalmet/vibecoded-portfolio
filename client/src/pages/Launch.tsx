@@ -1,14 +1,9 @@
-"use client";
-
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
-// import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { PiStarFourFill } from "react-icons/pi";
 import { GoNorthStar } from "react-icons/go";
-import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
+import { FaStar, FaCodeBranch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 // import { Navbar } from "@/components/Navbar";
 
