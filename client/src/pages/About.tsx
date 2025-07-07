@@ -57,6 +57,7 @@ const About = () => {
                                     <a
                                         href="https://x.com/VishalAakash18"
                                         rel="noopener noreferrer"
+                                        target="_blank"
                                         className="hover:text-blue-400 transition-all duration-300 bg-black border border-white/[0.15] p-2 rounded-xl hover:border-blue-400 hover:scale-105"
                                     >
                                         <Twitter size={20} />
@@ -64,6 +65,7 @@ const About = () => {
                                     <a
                                         href="https://www.linkedin.com/in/vishal-aakash"
                                         rel="noopener noreferrer"
+                                        target="_blank"
                                         className="hover:text-blue-600 transition-all duration-300 bg-black border border-white/[0.15] p-2 rounded-xl hover:border-blue-600 hover:scale-105"
                                     >
                                         <Linkedin size={20} />
@@ -71,12 +73,13 @@ const About = () => {
                                     <a
                                         href="https://github.com/vishalmet/"
                                         rel="noopener noreferrer"
+                                        target="_blank"
                                         className=" transition-all duration-300 bg-black border border-white/[0.15] p-2 rounded-xl hover:border-white hover:scale-105"
                                     >
                                         <Github size={20} />
                                     </a>
                                     <a
-                                        href=""
+                                        href="mailto:dev.vishalaakash@gmail.com?subject=Contact%20from%20Portfolio&body=Hi%20Vishal%2C%0A%0AI%20visited%20your%20portfolio%20and%20wanted%20to%20reach%20out%20to%20you.%0A%0A"
                                         rel="noopener noreferrer"
                                         className="hover:text-red-500 transition-all duration-300 bg-black border border-white/[0.15] p-2 rounded-xl hover:border-red-500 hover:scale-105"
                                     >
@@ -88,16 +91,7 @@ const About = () => {
                                 Full-stack developer (MERN) with a focus on <span className=" bricolage-font italic font-semibold">building user-friendly front-ends</span> using ReactJS (Vite), NextJS, and Tailwind CSS.
                             </p>
                             <p className="text-sm md:text-base text-white/60">
-                                Building decentralized solutions at{' '}
-                                <a
-                                    className="text-white/90 group-hover:text-amber-500/80 hover:underline hover:cursor-pointer"
-                                    href="https://winks.fun"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    @winksdotfun
-                                </a>{' '}
-                                and{' '}
+                                Building DeFi solutions at{' '}
                                 <a
                                     className="text-white/90 group-hover:text-amber-500/80 hover:underline hover:cursor-pointer"
                                     href="https://caddy.finance"

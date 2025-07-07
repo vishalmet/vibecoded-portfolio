@@ -46,13 +46,13 @@ import {
     //   ),
     //   href: '#',
     // },
-    {
-      title: 'Email',
-      icon: (
-        <Mail className='h-full w-full text-neutral-300' />
-      ),
-      href: '#',
-    },
+    // {
+    //   title: 'Email',
+    //   icon: (
+    //     <Mail className='h-full w-full text-neutral-300' />
+    //   ),
+    //   href: '#',
+    // },
   ];
   
   export function Navbar() {
