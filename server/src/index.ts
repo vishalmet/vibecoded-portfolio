@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import experienceRoutes from './routes/experience';
 import adminRoutes from './routes/admin';
+import projectRoutes from './routes/project';
+import path from 'path';
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +27,9 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/experience', experienceRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/projects', projectRoutes);
+
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Start server
 app.listen(port, () => {
