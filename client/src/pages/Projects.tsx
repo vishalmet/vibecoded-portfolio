@@ -1,11 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PiStarFourFill } from "react-icons/pi";
-import { GoNorthStar } from "react-icons/go";
 import { FaGithub, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +8,7 @@ import GitHubCalendar from "react-github-calendar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ProjectCard = ({ project, index, expanded, onExpandToggle }: { project: any; index: number; expanded: boolean; onExpandToggle: () => void }) => {
+const ProjectCard = ({ project, expanded, onExpandToggle }: { project: any; index: number; expanded: boolean; onExpandToggle: () => void }) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
