@@ -1,13 +1,11 @@
 import ScrollReveal from "@/components/scrollreveal/scrollReveal";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Meteors } from "@/components/ui/meteors";
-import { Twitter, Linkedin, Mail, CircleArrowRight, Github, Earth, Activity } from "lucide-react";
-import { PiStarFourFill, PiStarFourLight } from "react-icons/pi";
+import { Twitter, Linkedin, Mail, Github, Earth, Activity } from "lucide-react";
 import { GoNorthStar } from "react-icons/go";
 import ScrollVelocity from "@/components/scrollvelocity/scrollVelocity";
 import ShinyText from "@/components/shinyText.jsx"
-import GitHubCalendar from "react-github-calendar";
 
 
 
