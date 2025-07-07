@@ -1,8 +1,10 @@
+// Add this at the top if you don't have @types/busboy installed
+// declare module 'busboy';
+
 import express, { Request, Response } from 'express';
 import Project from '../models/project';
-// import upload from '../middleware/upload'; // REMOVE multer
-import path from 'path';
 import { put } from '@vercel/blob';
+import Busboy from 'busboy';
 
 const router = express.Router();
 
@@ -15,31 +17,78 @@ function isAdminMiddleware(req: Request, res: Response, next: any) {
   next();
 }
 
-// POST /api/projects - Add new project (admin only)
-router.post('/', isAdminMiddleware, async (req: Request, res: Response) => {
-  try {
-    let image = req.body.image;
-    let tags = req.body.tags;
+// Helper to handle multipart form with busboy and upload to Vercel Blob
+function handleProjectForm(req: Request, res: Response, isUpdate = false) {
+  const busboy = Busboy({ headers: req.headers });
+  let imageUrl = '';
+  const fields: any = {};
+  let fileUploadPromise: Promise<any> | null = null;
+
+  busboy.on('file', (fieldname: string, file: NodeJS.ReadableStream, filename: string, encoding: string, mimetype: string) => {
+    if (fieldname === 'image' && filename) {
+      // Cast file to any to satisfy @vercel/blob's type
+      fileUploadPromise = put(`projects/${Date.now()}-${filename}`, file as any, {
+        access: 'public',
+        addRandomSuffix: true,
+        contentType: mimetype,
+      }).then(blob => {
+        imageUrl = blob.url;
+      });
+    } else {
+      file.resume(); // skip other files
+    }
+  });
+
+  busboy.on('field', (fieldname: string, val: string) => {
+    fields[fieldname] = val;
+  });
+
+  busboy.on('finish', async () => {
+    if (fileUploadPromise) await fileUploadPromise;
+    let tags = fields.tags;
     if (typeof tags === 'string') {
       try { tags = JSON.parse(tags); } catch { tags = [tags]; }
     }
-    // Handle image upload if file is present (multipart/form-data)
-    if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
-      const form = await (req as any).formData();
-      const file = form.get('image');
-      if (file) {
-        const blob = await put(`projects/${Date.now()}-${file.name}`, file, {
-          access: 'public',
-          addRandomSuffix: true,
-        });
-        image = blob.url;
+    if (isUpdate) {
+      // For update, get id from req.params
+      const update: any = { ...fields, tags };
+      if (imageUrl) update.image = imageUrl;
+      try {
+        const updated = await Project.findByIdAndUpdate(req.params.id, update, { new: true });
+        if (!updated) return res.status(404).json({ error: 'Not found' });
+        res.json(updated);
+      } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+      }
+    } else {
+      // For create
+      const project = new Project({ ...fields, image: imageUrl, tags });
+      try {
+        await project.save();
+        res.status(201).json(project);
+      } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
       }
     }
-    const project = new Project({ ...req.body, image, tags });
-    await project.save();
-    res.status(201).json(project);
-  } catch (error) {
-    res.status(400).json({ error: (error as Error).message });
+  });
+
+  req.pipe(busboy);
+}
+
+// POST /api/projects - Add new project (admin only)
+router.post('/', isAdminMiddleware, (req: Request, res: Response) => {
+  if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
+    handleProjectForm(req, res, false);
+  } else {
+    // fallback for non-file requests (e.g. JSON)
+    let { image, tags, ...fields } = req.body;
+    if (typeof tags === 'string') {
+      try { tags = JSON.parse(tags); } catch { tags = [tags]; }
+    }
+    const project = new Project({ ...fields, image, tags });
+    project.save()
+      .then(saved => res.status(201).json(saved))
+      .catch(error => res.status(400).json({ error: (error as Error).message }));
   }
 });
 
@@ -54,29 +103,21 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // PUT /api/projects/:id - Update project (admin only)
-router.put('/:id', isAdminMiddleware, async (req: Request, res: Response) => {
-  try {
-    let image = req.body.image;
-    let tags = req.body.tags;
+router.put('/:id', isAdminMiddleware, (req: Request, res: Response) => {
+  if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
+    handleProjectForm(req, res, true);
+  } else {
+    // fallback for non-file requests (e.g. JSON)
+    let { image, tags, ...fields } = req.body;
     if (typeof tags === 'string') {
       try { tags = JSON.parse(tags); } catch { tags = [tags]; }
     }
-    if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
-      const form = await (req as any).formData();
-      const file = form.get('image');
-      if (file) {
-        const blob = await put(`projects/${Date.now()}-${file.name}`, file, {
-          access: 'public',
-          addRandomSuffix: true,
-        });
-        image = blob.url;
-      }
-    }
-    const updated = await Project.findByIdAndUpdate(req.params.id, { ...req.body, image, tags }, { new: true });
-    if (!updated) return res.status(404).json({ error: 'Not found' });
-    res.json(updated);
-  } catch (error) {
-    res.status(400).json({ error: (error as Error).message });
+    Project.findByIdAndUpdate(req.params.id, { ...fields, image, tags }, { new: true })
+      .then(updated => {
+        if (!updated) return res.status(404).json({ error: 'Not found' });
+        res.json(updated);
+      })
+      .catch(error => res.status(400).json({ error: (error as Error).message }));
   }
 });
 
