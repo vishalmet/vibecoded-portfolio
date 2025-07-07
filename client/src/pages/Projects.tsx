@@ -13,65 +13,7 @@ import GitHubCalendar from "react-github-calendar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Sample project data - This will be replaced with API data later
-const projects = [
-    {
-        id: 1,
-        title: "Vibecode Portfolio",
-        description: "A modern portfolio website built with React, TypeScript, and TailwindCSS. Features a beautiful UI with animations and responsive design.",
-        image: "/projects/portfolio.png",
-        tags: ["React", "TypeScript", "TailwindCSS", "Framer Motion", "TypeScript", "TailwindCSS", "Framer Motion"],
-        githubUrl: "https://github.com/vishalmet/vibecoded-portfolio",
-        liveUrl: "https://vishal-vibecode.vercel.app",
-    },
-    {
-        id: 2,
-        title: "Web3 Marketplace",
-        description: "A decentralized marketplace for digital assets built on Ethereum blockchain. Features smart contracts, NFT minting, and secure transactions.",
-        image: "/projects/marketplace.png",
-        tags: ["Solidity", "Web3.js", "React", "Ethereum"],
-        githubUrl: "https://github.com/vishalmet/web3-marketplace",
-        liveUrl: "https://web3-marketplace.vercel.app",
-    },
-    {
-        id: 3,
-        title: "AI Image Generator",
-        description: "An AI-powered image generation platform using Stable Diffusion. Create stunning artwork with custom prompts and style presets.",
-        image: "/projects/ai-generator.png",
-        tags: ["Python", "React", "Stable Diffusion", "AI"],
-        githubUrl: "https://github.com/vishalmet/ai-image-generator",
-        liveUrl: "https://ai-image-generator.vercel.app",
-    },
-    {
-        id: 4,
-        title: "AI Image Generator",
-        description: "An AI-powered image generation platform using Stable Diffusion. Create stunning artwork with custom prompts and style presets.",
-        image: "/projects/ai-generator.png",
-        tags: ["Python", "React", "Stable Diffusion", "AI"],
-        githubUrl: "https://github.com/vishalmet/ai-image-generator",
-        liveUrl: "https://ai-image-generator.vercel.app",
-    },
-    {
-        id: 5,
-        title: "AI Image Generator",
-        description: "An AI-powered image generation platform using Stable Diffusion. Create stunning artwork with custom prompts and style presets.",
-        image: "/projects/ai-generator.png",
-        tags: ["Python", "React", "Stable Diffusion", "AI"],
-        githubUrl: "https://github.com/vishalmet/ai-image-generator",
-        liveUrl: "https://ai-image-generator.vercel.app",
-    },
-    {
-        id: 6,
-        title: "AI Image Generator",
-        description: "An AI-powered image generation platform using Stable Diffusion. Create stunning artwork with custom prompts and style presets.",
-        image: "/projects/ai-generator.png",
-        tags: ["Python", "React", "Stable Diffusion", "AI"],
-        githubUrl: "https://github.com/vishalmet/ai-image-generator",
-        liveUrl: "https://ai-image-generator.vercel.app",
-    },
-];
-
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+const ProjectCard = ({ project, index, expanded, onExpandToggle }: { project: any; index: number; expanded: boolean; onExpandToggle: () => void }) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -125,6 +67,10 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         };
     }, []);
 
+    // Tag display logic
+    const showTags = project.tags && project.tags.length > 0;
+    const visibleTags = showTags ? (expanded ? project.tags : project.tags.slice(0, 4)) : [];
+
     return (
         <div
             ref={cardRef}
@@ -134,7 +80,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 
             <div className="relative h-48 overflow-hidden">
                 <img
-                    src={project.image}
+                    src={
+                        project.image?.startsWith('http')
+                            ? project.image
+                            : `http://localhost:5000${project.image}`
+                    }
                     alt={project.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -144,37 +94,52 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
             <div className="relative p-6 z-10">
                 <h3 className="mb-2 text-xl font-semibold text-white">{project.title}</h3>
                 <p className="mb-4 text-sm text-white/60">{project.description}</p>
-
                 <div className="mb-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="rounded-full bg-white/[0.08] px-3 py-1 text-xs text-white/60"
-                        >
-                            {tag}
-                        </span>
+                    {visibleTags.map((tag: string, i: number) => (
+                        <span key={i} className="rounded-full bg-white/[0.08] px-3 py-1 text-xs text-white/60">{tag}</span>
                     ))}
+                    {showTags && project.tags.length > 4 && !expanded && (
+                        <button
+                            type="button"
+                            className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+                            onClick={onExpandToggle}
+                        >
+                            +{project.tags.length - 4}
+                        </button>
+                    )}
+                    {showTags && project.tags.length > 4 && expanded && (
+                        <button
+                            type="button"
+                            className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
+                            onClick={onExpandToggle}
+                        >
+                            Show less
+                        </button>
+                    )}
                 </div>
-
                 <div className="flex items-center gap-4">
-                    <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-white/60 hover:text-white transition-colors z-20 relative"
-                    >
-                        <FaGithub className="h-5 w-5" />
-                        <span className="text-sm">Source</span>
-                    </a>
-                    <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-white/60 hover:text-white transition-colors z-20 relative"
-                    >
-                        <FaExternalLinkAlt className="h-5 w-5" />
-                        <span className="text-sm">Live Demo</span>
-                    </a>
+                    {project.sourceUrl && (
+                        <a
+                            href={project.sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors z-20 relative"
+                        >
+                            <FaGithub className="h-5 w-5" />
+                            <span className="text-sm">Source</span>
+                        </a>
+                    )}
+                    {project.liveUrl && (
+                        <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors z-20 relative"
+                        >
+                            <FaExternalLinkAlt className="h-5 w-5" />
+                            <span className="text-sm">Live Demo</span>
+                        </a>
+                    )}
                 </div>
             </div>
         </div>
@@ -186,6 +151,26 @@ export default function Projects() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [showAll, setShowAll] = useState(false);
     const hiddenProjectsRef = useRef<HTMLDivElement>(null);
+    const [projects, setProjects] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [expandedTags, setExpandedTags] = useState<string[]>([]); // project._id array
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/projects')
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to fetch projects');
+                return res.json();
+            })
+            .then(data => {
+                setProjects(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
 
     useEffect(() => {
         const title = titleRef.current;
@@ -276,6 +261,13 @@ export default function Projects() {
     const visibleProjects = projects.slice(0, 3);
     const hiddenProjects = projects.slice(3);
 
+    if (loading) {
+        return <div className="text-white text-center py-20">Loading projects...</div>;
+    }
+    if (error) {
+        return <div className="text-red-500 text-center py-20">{error}</div>;
+    }
+
     return (
         <div ref={containerRef} className="relative min-h-screen w-full bg-[#030303] py-10 overflow-hidden">
             {/* Animated background elements */}
@@ -303,7 +295,13 @@ export default function Projects() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {visibleProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
+                        <ProjectCard
+                            key={project._id || project.id || index}
+                            project={project}
+                            index={index}
+                            expanded={expandedTags.includes(project._id)}
+                            onExpandToggle={() => setExpandedTags(expandedTags => expandedTags.includes(project._id) ? expandedTags.filter(id => id !== project._id) : [...expandedTags, project._id])}
+                        />
                     ))}
                 </div>
 
@@ -314,7 +312,13 @@ export default function Projects() {
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
                         {hiddenProjects.map((project, index) => (
-                            <ProjectCard key={project.id} project={project} index={index + 3} />
+                            <ProjectCard
+                                key={project._id || project.id || index}
+                                project={project}
+                                index={index + 3}
+                                expanded={expandedTags.includes(project._id)}
+                                onExpandToggle={() => setExpandedTags(expandedTags => expandedTags.includes(project._id) ? expandedTags.filter(id => id !== project._id) : [...expandedTags, project._id])}
+                            />
                         ))}
                     </div>
                 </div>
