@@ -9,6 +9,7 @@
     "install-all": "npm install && cd server && npm install && cd ../client && npm install"
   },
   "devDependencies": {
+    "@types/busboy": "^1.5.4",
     "concurrently": "^8.2.1"
   }
-} 
+}
