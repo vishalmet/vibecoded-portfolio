@@ -278,12 +278,21 @@ export default function Projects() {
                         </span>
                     </div>
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                        My Projects
+                        My <span className="text-amber-500">Projects</span>
                     </h2>
+                    <div className=" text-white flex justify-center py-4">
+                <GitHubCalendar
+                    username="vishalmet"
+                    blockSize={10}
+                    blockMargin={3}
+                    fontSize={16}
+                />
+            </div>
                     <p className="text-white/60 max-w-2xl mx-auto">
                         Here are some of my recent projects. Each project is unique and built with different technologies and frameworks.
                     </p>
                 </div>
+               
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {visibleProjects.map((project, index) => (
@@ -336,14 +345,6 @@ export default function Projects() {
                         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/[0.1] to-rose-500/[0.1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </Button>
                 </div>
-            </div>
-            <div className=" text-white flex justify-center py-10">
-                <GitHubCalendar
-                    username="vishalmet"
-                    blockSize={10}
-                    blockMargin={3}
-                    fontSize={16}
-                />
             </div>
         </div>
     );
