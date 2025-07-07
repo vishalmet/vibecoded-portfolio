@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import Project from '../models/project';
-import upload from '../middleware/upload';
+// import upload from '../middleware/upload'; // REMOVE multer
 import path from 'path';
+import { put } from '@vercel/blob';
 
 const router = express.Router();
 
@@ -9,28 +10,30 @@ function isAdmin(req: Request) {
   return req.headers['x-admin-password'] === process.env.ADMIN_PASSWORD;
 }
 
-// POST /api/projects/upload - Upload project image (admin only)
-router.post('/upload', isAdminMiddleware, upload.single('image'), (req: Request, res: Response) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  const imageUrl = `/uploads/projects/${req.file.filename}`;
-  res.status(200).json({ imageUrl });
-});
-
 function isAdminMiddleware(req: Request, res: Response, next: any) {
   if (!isAdmin(req)) return res.status(401).json({ error: 'Unauthorized' });
   next();
 }
 
 // POST /api/projects - Add new project (admin only)
-router.post('/', isAdminMiddleware, upload.single('image'), async (req: Request, res: Response) => {
+router.post('/', isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     let image = req.body.image;
-    if (req.file) {
-      image = `/uploads/projects/${req.file.filename}`;
-    }
     let tags = req.body.tags;
     if (typeof tags === 'string') {
       try { tags = JSON.parse(tags); } catch { tags = [tags]; }
+    }
+    // Handle image upload if file is present (multipart/form-data)
+    if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
+      const form = await (req as any).formData();
+      const file = form.get('image');
+      if (file) {
+        const blob = await put(`projects/${Date.now()}-${file.name}`, file, {
+          access: 'public',
+          addRandomSuffix: true,
+        });
+        image = blob.url;
+      }
     }
     const project = new Project({ ...req.body, image, tags });
     await project.save();
@@ -51,15 +54,23 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // PUT /api/projects/:id - Update project (admin only)
-router.put('/:id', isAdminMiddleware, upload.single('image'), async (req: Request, res: Response) => {
+router.put('/:id', isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     let image = req.body.image;
-    if (req.file) {
-      image = `/uploads/projects/${req.file.filename}`;
-    }
     let tags = req.body.tags;
     if (typeof tags === 'string') {
       try { tags = JSON.parse(tags); } catch { tags = [tags]; }
+    }
+    if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
+      const form = await (req as any).formData();
+      const file = form.get('image');
+      if (file) {
+        const blob = await put(`projects/${Date.now()}-${file.name}`, file, {
+          access: 'public',
+          addRandomSuffix: true,
+        });
+        image = blob.url;
+      }
     }
     const updated = await Project.findByIdAndUpdate(req.params.id, { ...req.body, image, tags }, { new: true });
     if (!updated) return res.status(404).json({ error: 'Not found' });
