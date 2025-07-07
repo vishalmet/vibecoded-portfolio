@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { API_URL } from "@/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -218,7 +219,7 @@ export default function Experience() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/experience')
+    fetch(`${API_URL}/experience`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch experience data');
         return res.json();
