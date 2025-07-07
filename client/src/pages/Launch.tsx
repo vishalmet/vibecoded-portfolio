@@ -287,7 +287,7 @@ export default function Launch() {
               <GoNorthStar />
             </span>
             <Button
-              onClick={() => window.open("https://drive.google.com/file/d/1VQ1c81pe89LXu8IGlpfd5Oadd3h678K3/view?usp=sharing", "_blank")}
+              onClick={() => window.open("https://drive.google.com/file/d/1ImIRJJyPUdqsO6bzh6qRMbS-B7dYqgKe/view?usp=sharing", "_blank")}
               className=" "
             >
               Resume
