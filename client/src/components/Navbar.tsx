@@ -39,13 +39,13 @@ import {
       ),
       href: '#experience',
     },
-    {
-      title: 'Change Log',
-      icon: (
-        <Package className='h-full w-full text-neutral-300' />
-      ),
-      href: '#',
-    },
+    // {
+    //   title: 'Change Log',
+    //   icon: (
+    //     <Package className='h-full w-full text-neutral-300' />
+    //   ),
+    //   href: '#',
+    // },
     {
       title: 'Email',
       icon: (

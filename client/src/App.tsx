@@ -8,6 +8,7 @@ import Projects from "./pages/Projects.tsx";
 import Experience from "./pages/Experience.tsx";
 import AdminLogin from "./pages/admin/Login.tsx";
 import AdminDashboard from "./pages/admin/Dashboard.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -62,6 +63,7 @@ function App() {
               <div className="  " id="experience">
                 <Experience />
               </div>
+              <Footer />
             </div>
           }
         />
