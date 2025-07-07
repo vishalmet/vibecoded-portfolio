@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GitHubCalendar from "react-github-calendar";
+import { API_URL } from "@/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,7 +153,7 @@ export default function Projects() {
     const [expandedTags, setExpandedTags] = useState<string[]>([]); // project._id array
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/projects')
+        fetch(`${API_URL}/projects`)
             .then(res => {
                 if (!res.ok) throw new Error('Failed to fetch projects');
                 return res.json();
