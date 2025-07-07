@@ -17,6 +17,11 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
+  // Show latest (last) role at the top
+  const roles = experience.roles || [];
+  const latestRole = roles[roles.length - 1];
+  const otherRoles = roles.slice(0, -1);
+
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
@@ -88,21 +93,21 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
           <div className="flex-1">
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="text-xl font-semibold text-white mb-1">{experience.roles[0].role}</h3>
+                <h3 className="text-xl font-semibold text-white mb-1">{latestRole.role}</h3>
                 <div className="flex items-center gap-2 text-white/60">
                   <FaBuilding className="h-4 w-4" />
                   <span className="text-sm">{experience.organization}</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/40 text-sm mt-1">
                   <FaCalendarAlt className="h-3 w-3" />
-                  <span>{experience.roles[0].startDate} - {experience.roles[0].endDate}</span>
+                  <span>{latestRole.startDate} - {latestRole.endDate}</span>
                 </div>
                 {/* Tags display */}
                 {experience.tags && experience.tags.length > 0 && (
                   <TagsDisplay tags={experience.tags} />
                 )}
               </div>
-              {experience.roles.length > 1 && (
+              {otherRoles.length > 0 && (
                 <Button
                   onClick={toggleExpand}
                   className="p-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] transition-colors"
@@ -118,12 +123,12 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
           </div>
         </div>
 
-        <p className="text-white/60 text-sm mb-4">{experience.roles[0].description}</p>
+        <p className="text-white/60 text-sm mb-4">{latestRole.description}</p>
 
-        {/* Role-level website for first role */}
-        {experience.roles[0].website && (
+        {/* Role-level website for latest role */}
+        {latestRole.website && (
           <a
-            href={experience.roles[0].website}
+            href={latestRole.website}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mr-3 text-white/60 hover:text-white transition-colors mb-2"
@@ -146,9 +151,9 @@ const ExperienceCard = ({ experience, index }: { experience: any; index: number 
           </a>
         )}
 
-        {isExpanded && experience.roles.length > 1 && (
+        {isExpanded && otherRoles.length > 0 && (
           <div className="mt-6 space-y-6">
-            {experience.roles.slice(1).map((role: any, roleIndex: number) => (
+            {otherRoles.map((role: any, roleIndex: number) => (
               <div
                 key={roleIndex}
                 className="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white/[0.1]"
