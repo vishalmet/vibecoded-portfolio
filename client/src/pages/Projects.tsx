@@ -76,11 +76,7 @@ const ProjectCard = ({ project, expanded, onExpandToggle }: { project: any; inde
 
             <div className="relative h-48 overflow-hidden">
                 <img
-                    src={
-                        project.image?.startsWith('http')
-                            ? project.image
-                            : `http://localhost:5000${project.image}`
-                    }
+                    src={project.image}
                     alt={project.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />

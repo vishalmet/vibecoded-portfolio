@@ -443,6 +443,7 @@ export default function AdminDashboard() {
                     <div>
                       <div className="font-bold">{proj.title}</div>
                       <div className="text-sm text-gray-400 mb-2">{proj.description}</div>
+                      <div className="text-sm text-gray-400 mb-2">{proj.image}</div>
                       {/* Tags display */}
                       {showTags && (
                         <div className="flex flex-wrap gap-2 mt-2">
