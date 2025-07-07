@@ -191,7 +191,7 @@ function TagsDisplay({ tags }: { tags: string[] }) {
   return (
     <div className="flex flex-wrap gap-2 mt-2">
       {visibleTags.map((tag, i) => (
-        <span key={i} className="bg-indigo-600 text-white px-2 py-1 rounded text-xs">{tag}</span>
+        <span key={i} className="bg-amber-500/10 text-white px-2 py-1 rounded text-xs">{tag}</span>
       ))}
       {tags.length > 4 && !showAll && (
         <button
