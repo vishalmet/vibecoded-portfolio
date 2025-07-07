@@ -40,15 +40,18 @@ function handleProjectForm(req: Request, res: Response, isUpdate = false) {
   });
 
   busboy.on('field', (fieldname: string, val: string) => {
-    fields[fieldname] = val;
+    if (fieldname === 'tags') {
+      if (!fields.tags) fields.tags = [];
+      fields.tags.push(val);
+    } else {
+      fields[fieldname] = val;
+    }
   });
 
   busboy.on('finish', async () => {
     if (fileUploadPromise) await fileUploadPromise;
-    let tags = fields.tags;
-    if (typeof tags === 'string') {
-      try { tags = JSON.parse(tags); } catch { tags = [tags]; }
-    }
+    // tags is now always an array if present
+    const tags = fields.tags || [];
     if (isUpdate) {
       // For update, get id from req.params
       const update: any = { ...fields, tags };
