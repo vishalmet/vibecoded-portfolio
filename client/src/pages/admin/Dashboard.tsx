@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '@/constant';
 
 const TABS = ["Experience", "Projects"];
 
@@ -55,7 +56,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (tab !== 'Experience') return;
     setExpLoading(true);
-    fetch('http://localhost:5000/api/experience')
+    fetch(`${API_URL}/experience`)
       .then(res => res.json())
       .then(data => {
         setExperiences(data);
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (tab !== 'Projects') return;
     setProjLoading(true);
-    fetch('http://localhost:5000/api/projects')
+    fetch(`${API_URL}/projects`)
       .then(res => res.json())
       .then(data => {
         setProjects(data);
@@ -123,7 +124,7 @@ export default function AdminDashboard() {
     }
     try {
       const method = expEditingId ? 'PUT' : 'POST';
-      const url = expEditingId ? `http://localhost:5000/api/experience/${expEditingId}` : 'http://localhost:5000/api/experience';
+      const url = expEditingId ? `${API_URL}/experience/${expEditingId}` : `${API_URL}/experience`;
       const res = await fetch(url, {
         method,
         headers: {
@@ -162,7 +163,7 @@ export default function AdminDashboard() {
     }
     if (!window.confirm('Delete this experience?')) return;
     try {
-      await fetch(`http://localhost:5000/api/experience/${id}`, {
+      await fetch(`${API_URL}/experience/${id}`, {
         method: 'DELETE',
         headers: {
           'x-admin-password': adminPassword,
@@ -219,7 +220,7 @@ export default function AdminDashboard() {
       } else if (projForm.image) {
         formData.append('image', projForm.image);
       }
-      res = await fetch(projEditingId ? `http://localhost:5000/api/projects/${projEditingId}` : 'http://localhost:5000/api/projects', {
+      res = await fetch(projEditingId ? `${API_URL}/projects/${projEditingId}` : `${API_URL}/projects`, {
         method: projEditingId ? 'PUT' : 'POST',
         headers: { 'x-admin-password': adminPassword },
         body: formData,
@@ -249,7 +250,7 @@ export default function AdminDashboard() {
     }
     if (!window.confirm('Delete this project?')) return;
     try {
-      await fetch(`http://localhost:5000/api/projects/${id}`, {
+      await fetch(`${API_URL}/projects/${id}`, {
         method: 'DELETE',
         headers: {
           'x-admin-password': adminPassword,
