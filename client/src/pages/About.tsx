@@ -94,11 +94,11 @@ const About = () => {
                                 Building DeFi solutions at{' '}
                                 <a
                                     className="text-white/90 group-hover:text-amber-500/80 hover:underline hover:cursor-pointer"
-                                    href="https://caddy.finance"
+                                    href="https://kanalabs.io/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    @caddyfinance
+                                    @kanalabs
                                 </a>.
                             </p>
                         </CardContent>
