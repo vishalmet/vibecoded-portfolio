@@ -5,6 +5,7 @@ import connectDB from './config/db';
 import experienceRoutes from './routes/experience';
 import adminRoutes from './routes/admin';
 import projectRoutes from './routes/project';
+import viewsRoutes from './routes/views';
 import path from 'path';
 
 // Load environment variables
@@ -28,6 +29,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/experience', experienceRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/views', viewsRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
